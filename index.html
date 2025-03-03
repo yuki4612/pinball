@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .ball {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ball" id="ball"></div>
+
+    <script>
+        const ball = document.getElementById('ball');
+        let posX = 50;
+        let posY = 50;
+        let velocityX = 4;
+        let velocityY = 3;
+        const boundaryWidth = window.innerWidth - 50;
+        const boundaryHeight = window.innerHeight - 50;
+
+        function getRandomColor() {
+            return '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        function animateBall() {
+            posX += velocityX;
+            posY += velocityY;
+            
+            if (posX >= boundaryWidth || posX <= 0) {
+                velocityX *= -1;
+                ball.style.backgroundColor = getRandomColor();
+            }
+            if (posY >= boundaryHeight || posY <= 0) {
+                velocityY *= -1;
+                ball.style.backgroundColor = getRandomColor();
+            }
+            
+            ball.style.left = posX + 'px';
+            ball.style.top = posY + 'px';
+        }
+
+        setInterval(animateBall, 16);
+    </script>
+</body>
+</html>
